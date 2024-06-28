@@ -1,15 +1,20 @@
 package com.example.cms;
 
+import com.example.cms.appointment.Appointment;
+import com.example.cms.appointment.AppointmentRepository;
 import com.example.cms.department.Department;
 import com.example.cms.department.DepartmentRepository;
 import com.example.cms.employee.*;
 import com.example.cms.inventory.*;
+import com.example.cms.patient.Patient;
+import com.example.cms.patient.PatientRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.List;
 
@@ -20,7 +25,9 @@ public class DataConfig {
     CommandLineRunner commandLineRunner(
             EmployeeRepository employeeRepository,
             DepartmentRepository departmentRepository,
-            MedicineRepository medicineRepository)
+            InventoryRepository inventoryRepository,
+            PatientRepository patientRepository,
+            AppointmentRepository appointmentRepository)
     {
         return args ->
         {
@@ -67,8 +74,43 @@ public class DataConfig {
                     "Beximco",
                     "+8801954765412"
             );
+
+            Supplies supplies = new Supplies(
+                    "Gloves",
+                    200,
+                    BigDecimal.valueOf(650),
+                    InventoryType.SUPPLIES,
+                    "Medical Supplies Inc.",
+                    "Disposable gloves"
+            );
+
+            Equipment equipment = new Equipment(
+                    "X-Ray Machine",
+                    1,
+                    BigDecimal.valueOf(100000.0),
+                    InventoryType.EQUIPMENT,
+                    "MedTech",
+                    "Health Inc.",
+                    "10 years"
+            );
             
-            medicineRepository.saveAll(List.of(medicine));
+            inventoryRepository.saveAll(List.of(medicine, supplies, equipment));
+
+            Patient patient = new Patient(
+                    "Beefy Pupee",
+                    "+88018739983"
+            );
+
+            patientRepository.saveAll(List.of(patient));
+
+            Appointment appointment = new Appointment(
+                   patient,
+                   nafi,
+                   LocalDateTime.now()
+            );
+
+            appointmentRepository.saveAll(List.of(appointment));
+
         };
     }
 }

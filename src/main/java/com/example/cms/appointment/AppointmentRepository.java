@@ -1,9 +1,9 @@
-package com.example.cms.inventory;
+package com.example.cms.appointment;
+
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MedicineRepository extends JpaRepository<Medicine, Long> {
-
+public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
 }

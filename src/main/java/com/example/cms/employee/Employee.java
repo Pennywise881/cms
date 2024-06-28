@@ -1,9 +1,12 @@
 package com.example.cms.employee;
 
+import com.example.cms.appointment.Appointment;
 import com.example.cms.department.Department;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
@@ -22,6 +25,9 @@ public class Employee {
     @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     @PrimaryKeyJoinColumn
     private EmployeeDetails employeeDetails;
+
+    @OneToMany(mappedBy = "doctor", orphanRemoval = true)
+    private List<Appointment> appointmentList = new ArrayList<>();
 
     public Employee() {
 
