@@ -1,6 +1,9 @@
 package com.example.cms.inventory;
 
+import com.example.cms.diagnosis.Diagnosis;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 import java.math.BigDecimal;
@@ -17,6 +20,10 @@ public class Medicine extends Inventory {
     private LocalDate expirationDate;
     private String supplier;
     private String supplierPhoneNumber;
+
+    @ManyToOne()
+    @JoinColumn(name = "diagnosis_id")
+    private Diagnosis diagnosis;
 
     public Medicine()
     {

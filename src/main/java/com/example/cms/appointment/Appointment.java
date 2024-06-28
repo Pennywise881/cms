@@ -1,6 +1,7 @@
 package com.example.cms.appointment;
 
 
+import com.example.cms.diagnosis.Diagnosis;
 import com.example.cms.employee.Employee;
 import com.example.cms.patient.Patient;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -25,6 +26,10 @@ public class Appointment {
     @JoinColumn(name = "employee_id", nullable = false)
     @JsonIgnore
     private Employee doctor;
+
+    @OneToOne(mappedBy = "appointment", orphanRemoval = true)
+    @PrimaryKeyJoinColumn
+    private Diagnosis diagnosis;
 
     private LocalDateTime appointmentDateTime;
 

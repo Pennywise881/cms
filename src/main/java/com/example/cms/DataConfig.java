@@ -101,7 +101,12 @@ public class DataConfig {
                     "+88018739983"
             );
 
-            patientRepository.saveAll(List.of(patient));
+            Patient patient1 = new Patient(
+                    "Mr. Dola",
+                    "+8801912245678"
+            );
+
+            patientRepository.saveAll(List.of(patient, patient1));
 
             Appointment appointment = new Appointment(
                    patient,
@@ -109,8 +114,24 @@ public class DataConfig {
                    LocalDateTime.now()
             );
 
-            appointmentRepository.saveAll(List.of(appointment));
+            Appointment appointment1 = new Appointment(
+                    patient,
+                    nafi,
+                    LocalDateTime.of(2024, Month.JULY, 7, 8, 42)
+            );
 
+            Appointment appointment2 = new Appointment(
+                    patient1,
+                    nafi,
+                    LocalDateTime.of(2024, Month.JULY, 7, 10, 0)
+            );
+
+            appointmentRepository.saveAll(List.of(
+                    appointment,
+                    appointment1,
+                    appointment2
+                    )
+            );
         };
     }
 }
