@@ -30,24 +30,25 @@ public class Diagnosis {
     @JsonIgnore
     private Employee doctor;
 
-    @MapsId
-    @OneToOne
-    @JoinColumn(name = "id")
-    private Appointment appointment;
+//    @MapsId
+//    @OneToOne
+//    @JoinColumn(name = "id")
+//    private Appointment appointment;
+    private Long appointmentId;
 
     private String details;
 
     @OneToMany(mappedBy = "diagnosis", orphanRemoval = false)
     private List<Medicine> medicineList;
 
-
     public Diagnosis() {
     }
 
-    public Diagnosis(Patient patient, Employee doctor, Appointment appointment, String details, List<Medicine> medicineList) {
+    public Diagnosis(Patient patient, Employee doctor, /*Appointment appointment*/Long appointmentId, String details, List<Medicine> medicineList) {
         this.patient = patient;
         this.doctor = doctor;
-        this.appointment = appointment;
+//        this.appointment = appointment;
+        this.appointmentId = appointmentId;
         this.details = details;
         this.medicineList = medicineList;
     }
@@ -92,11 +93,19 @@ public class Diagnosis {
 //        this.appointment = appointment;
 //    }
 //
-//    public List<Medicine> getMedicineList() {
-//        return medicineList;
-//    }
-//
-//    public void setMedicineList(List<Medicine> medicineList) {
-//        this.medicineList = medicineList;
-//    }
+    public List<Medicine> getMedicineList() {
+        return medicineList;
+    }
+
+    public void setMedicineList(List<Medicine> medicineList) {
+        this.medicineList = medicineList;
+    }
+
+    public Long getAppointmentId() {
+        return appointmentId;
+    }
+
+    public void setAppointmentId(Long appointmentId) {
+        this.appointmentId = appointmentId;
+    }
 }

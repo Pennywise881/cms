@@ -27,9 +27,9 @@ public class Appointment {
     @JsonIgnore
     private Employee doctor;
 
-    @OneToOne(mappedBy = "appointment", orphanRemoval = true)
-    @PrimaryKeyJoinColumn
-    private Diagnosis diagnosis;
+//    @OneToOne(mappedBy = "appointment", orphanRemoval = true)
+//    @PrimaryKeyJoinColumn
+//    private Diagnosis diagnosis;
 
     private LocalDateTime appointmentDateTime;
 

@@ -4,6 +4,8 @@ import com.example.cms.appointment.Appointment;
 import com.example.cms.appointment.AppointmentRepository;
 import com.example.cms.department.Department;
 import com.example.cms.department.DepartmentRepository;
+import com.example.cms.diagnosis.Diagnosis;
+import com.example.cms.diagnosis.DiagnosisRepository;
 import com.example.cms.employee.*;
 import com.example.cms.inventory.*;
 import com.example.cms.patient.Patient;
@@ -16,6 +18,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
@@ -27,7 +30,8 @@ public class DataConfig {
             DepartmentRepository departmentRepository,
             InventoryRepository inventoryRepository,
             PatientRepository patientRepository,
-            AppointmentRepository appointmentRepository)
+            AppointmentRepository appointmentRepository,
+            DiagnosisRepository diagnosisRepository)
     {
         return args ->
         {
@@ -132,6 +136,19 @@ public class DataConfig {
                     appointment2
                     )
             );
+
+            Diagnosis diagnosis = new Diagnosis(
+                    patient,
+                    nafi,
+                    appointment.getId(),
+                    "Patient has a severe headache therefore, prescribing paracetamol",
+                    List.of(medicine)
+            );
+
+            diagnosisRepository.save(diagnosis);
+
+            medicine.setQuantity(medicine.getQuantity()-1);
+            inventoryRepository.save(medicine);
         };
     }
 }
